@@ -1,0 +1,59 @@
+//-variables
+- var imgpath = 'img/projects/'
+
+doctype
+html(lang="ru",class="no-js")
+	head
+		title Fedor Markushevich
+		include includes/head
+	body
+		.main#top
+			include includes/header
+			.content-area
+				section#about
+					header
+						h1 About
+					//.text(lang="russian") 
+						p Федор Маркушевич в 1961 году поступил на службу в милицию участковым инспектором, окончил Елабужскую специальную среднюю школу милиции (1961—1963), Свердловское отделение Высшей школы МВД РСФСР (1968). Работал начальником отделения милиции, заместителем начальника районного отдела милиции по оперативной работе. В 1974—1979 годах служил заместителем начальника, а в 1979—1983 годах — начальником отдела внутренних дел в Калининграде Московской области.
+					.text(lang="english") 
+						p Moscow City, #[a(href='mailto:fedor@markushevich.ru') fedor@markushevich.ru], +79166709171
+						p #[strong Education] <br>Master of History, Lomonosov (Moscow State) University, 2001 <br>Bachelor of Arts (cameraman), Moscow Film School, 19
+
+						p #[strong Professional Activity]<br> 2001 – present, collaboration with GQ, Tatler, Glamour, Bazaar, Cosmopolitan, Grazia, Icons, Officiel, Madame Figaro, Instyle, Elle, Marie Claire, Esquire, Wallpaper, Домовой (Domovoy), Mini, Timeout, Yes, Playboy, FHM, Maxim magazines.
+
+						p #[strong Solo exhibitions]<br>2013<br>«Collection», pop/off/art gallery, Berlin
+
+						p #[strong Selected Group Exhibitions]<br>2011<br>Exhibition project of “Art-Moscow” and art gallery “Glazgallery” («Глаз»), Moscow<br>Participation in Philips de Pury Bric Auction in London<br>2011-2009 – exhibition project “Best of Russia”, Moscow<br>2009 - “Fashion and Style in Photography”, International Festival in Moscow
+
+						p #[strong Awards]<br>2009 - Silver Crown Award, “Fashion and Style in Photography”, International Festival in Moscow
+
+						p #[strong Personal Information]<br>Born in 1976, Moscow
+
+				section#gallery
+					ul.projects
+						- var imagedirs = {'collection': {'Collection':15} ,'attack': {'Attack':4} ,'breakfast': {'Breakfast with Blondie':1} ,'bunker': {'Bunker':17},'construktika': {'Construktika':4} ,'danaya': {'Still life with Danaya':6} ,'feast': {'Feast what wasn\'t there':1} ,'georgia': {'Georgia':8} ,'intimate-conversation': {'Intimate Conversation':1} ,'pleasure': {'With great pleasure':8} ,'plexus': {'Plexus':12},'reflection': {'Reflection':8},'stranger': {'Stranger':7},'trash-kingdom': {'Trash Kingdom':6} ,'whirlpool': {'Whirlpool':3}} 
+						each details, foldername in imagedirs
+							each filenumber, title in details
+								- var parallax_shift = Math.floor(Math.random() * (10 - 130) + 130)
+								- var panorama_class = ''
+								- var parallax_attr = '{"y": -'+ parallax_shift + ',"smoothness":50}'
+								- if (filenumber == 1) 
+									- panorama_class = 'panorama'
+									- parallax_attr = ''
+								li(class="#{panorama_class}")
+									a(href="##{foldername}")
+										figure.projects_cover(data-parallax="#{parallax_attr}")
+											img(src=imgpath+foldername+'/cover.jpg',alt=title+' cover')
+											figcaption #{title}
+										ul.projects_item 
+											- for (var i = 1; i <= filenumber; ++i)
+												li
+													- var n = (i < 10) ? ('0' + i) : i;
+													- if (foldername === 'collection' && n === 15)
+														video(loop="true",preload="auto",autoplay="true",poster=imgpath+foldername+'/'+n+'_poster.jpg')
+															source(src=imgpath+foldername+'/'+n+'.mp4',type="video/mp4")
+															source(src=imgpath+foldername+'/'+n+'.webm',type="video/webm")
+													- else
+														img(src=imgpath+foldername+'/'+n+'.jpg',alt=title+' '+n)
+			include includes/footer
+			| <!-- Yandex.Metrika counter --><script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter1918240 = new Ya.Metrika({ id:1918240, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/1918240" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
